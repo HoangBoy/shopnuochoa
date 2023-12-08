@@ -1,8 +1,21 @@
 <?php
    
     if(isset($_GET ['cart']) && $_GET['cart'] == 'unset'){
+        
         unset($_SESSION['cart']);        
     }
+
+    // Kiểm tra xem action là "xoagio" hay không
+if (isset($_GET['action']) && $_GET['action'] == 'giohang' && isset($_GET['update']) && $_GET['update'] == 'xoagio') {
+    $product_id_to_remove = $_GET['id'];
+
+    // Xoá sản phẩm khỏi giỏ hàng
+    if (isset($_SESSION['cart'][$product_id_to_remove])) {
+        unset($_SESSION['cart'][$product_id_to_remove]);
+    }
+    // Chuyển hướng trở lại trang giỏ hàng
+}
+
 
 ?>
 
@@ -38,8 +51,18 @@
                            Tổng giá
                         </div>   
                     </div>
-                    <a style="color: black;" href="index.php?action=giohang&query=gio&cart=unset">
+                    <a id="unset-cart" style="color: black;" href="index.php?action=giohang&query=gio&cart=unset">
                             <i style="position:absolute" class="ti-trash"></i>
+                            <script> var xoa = document.getElementById('unset-cart')
+                                    xoa.onclick = function (){
+                                                           
+                            if (confirm("Xác nhận xoá toàn bộ sản phẩm giỏ hàng")) {
+                                return true;
+                            }
+                       return false ; 
+
+                                    }
+                            </script>
                         </a>
                     </div>
                 </div>
@@ -92,7 +115,17 @@
                             <strong><?php echo $kich_co ?></strong>
                         </div>
                         <div>
-                            <a href="index.php?action=giohang&query=gio&update=xoagio&id=<?php echo $product_id ?>">Xoá</a>
+                            <a id="xoagio" href="index.php?action=giohang&query=gio&update=xoagio&id=<?php echo $product_id ?>">Xoá</a>
+                            <script> var xoa = document.getElementById('xoagio')
+                                    xoa.onclick = function (){
+                                                           
+                            if (confirm("Bạn có chắc muốn xoá sản phẩm này khỏi giỏ hàng ?")) {
+                                return true;
+                            }
+                       return false ; 
+
+                                    }
+                            </script>
                         </div>
                     </div>
                     <div class="content-prd-flex">
