@@ -29,9 +29,13 @@
       <td><?php echo $row_admin['username'] ?></td>
       <td><?php echo $row_admin['quyen'] ?></td>
       <?php if($quyen == 'admin'){
-     echo'      <td>
-     <a class="action-btn-adm" href="index.php?action=xoanguoidung&idxoa=<?php echo $row_admin["id"]?>Xoá người dùng</a>
-   </td>';}
+
+    ?>
+    <td> 
+    <a class='action-btn-adm' href="index.php?action=xoanguoidung&idxoa=<?php echo $row_admin['id']?>">Xoá người dùng</a>
+    </td>
+    <?php
+    ;}
    else{
     echo '<td>Không có quyền </td>';
    }
